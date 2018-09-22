@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "date": "Friday 22 June 2018",
+      "data": [
+        {
+          "id": 1234,
+          "category": "Personal",
+          "content": "Go to New York",
+          "time": "09:00"
+        },
+        {
+          "id": 1254,
+          "category": "To do",
+          "content": "Go to London",
+          "time": "10:00"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "date": "Saturday 23 June 2018",
+      "data": [
+        {
+          "id": 1334,
+          "category": "Shopping",
+          "content": "Tomatoes",
+          "time": "09:00"
+        },
+        {
+          "id": 1236,
+          "category": "Birthday",
+          "content": "John",
+          "time": "10:00"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "date": "Sunday 24 June 2018",
+      "data": [
+        {
+          "id": 1244,
+          "category": "Event",
+          "content": "Party at ABCD",
+          "time": "09:00"
+        },
+        {
+          "id": 2234,
+          "category": "Personal",
+          "content": "John",
+          "time": "10:00"
+        }
+      ]
+    }
+  ]
+}
