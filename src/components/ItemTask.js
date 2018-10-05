@@ -5,18 +5,63 @@ import {
 } from 'react-native';
 import RoundCheckbox from 'rn-round-checkbox';
 
-import { categoryShopping } from '../styles'
+import {
+  categoryShopping, categoryBirthday, categoryEvent,
+  categoryTodo, categoryPersonal, calendarHighlight
+} from '../styles'
+
+import { connect } from 'react-redux'
+import { toggleTask, delTask } from '../actions'
 
 class ItemTask extends Component {
-  state = {}
+  state = {
+    taskDone: this.props.item.isDone
+  }
+
+  chooseColorByCateegory = () => {
+    switch (this.props.item.category) {
+      case 'To do': return categoryTodo
+      case 'Shopping': return categoryShopping
+      case 'Birthday': return categoryBirthday
+      case 'Event': return categoryEvent
+      case 'Personal': return categoryPersonal
+    }
+  }
+
+  deleteTask = () => {
+    this.props.delTask({
+      dayId: this.props.dayId,
+      taskId: this.props.item.id
+    })
+  }
+
   render() {
+    console.log('==========');
+    console.log(this.props.item.id);
+    console.log(Math.floor(this.props.item.id / (24 * 60 * 60 * 1000)));
+
     return (
       <View style={styles.container}>
-        <RoundCheckbox />
-        <Text style={styles.time}>09:00</Text>
-        <TouchableOpacity style={styles.task}>
-          <Text style={styles.content}>Tomatoes</Text>
-          <Text style={styles.category}>Shopping</Text>
+        <RoundCheckbox
+          checked={this.state.taskDone}
+          onValueChange={(newValue) => {
+            this.setState({ taskDone: newValue })
+            this.props.toggleTask({
+              // dayId: Math.floor(this.props.item.id / (24 * 60 * 60 * 1000)),
+              dayId: this.props.dayId,
+              taskId: this.props.item.id
+            })
+          }}
+          backgroundColor={calendarHighlight} />
+        <Text style={styles.time}>{this.props.item.time}</Text>
+        <TouchableOpacity
+          style={[
+            styles.task,
+            { backgroundColor: this.props.item.isDone ? 'gray' : this.chooseColorByCateegory() }
+          ]}
+          onLongPress={this.deleteTask}>
+          <Text style={styles.content}>{this.props.item.content}</Text>
+          <Text style={styles.category}>{this.props.item.category}</Text>
         </TouchableOpacity>
       </View>
     );
@@ -55,4 +100,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ItemTask;
+export default connect(null, { toggleTask, delTask })(ItemTask);

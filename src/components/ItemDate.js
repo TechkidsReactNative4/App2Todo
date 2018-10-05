@@ -7,11 +7,19 @@ import {
 class ItemDate extends Component {
   state = {}
   render() {
+    // const dayOfWeek = this.props.date.split('-')[0]
+    // const date = this.props.date.split('-')[1]
+
+    const dayOfWeek = this.props.date
+      .substring(0, this.props.date.indexOf(' '))
+    const date = this.props.date
+      .substring(this.props.date.indexOf(' ') + 1)
+
     return (
       <View
         style={styles.container}>
-        <Text style={styles.dayOfWeek}>Wednesday</Text>
-        <Text style={styles.date}>20 Sep 2018</Text>
+        <Text style={styles.dayOfWeek}>{dayOfWeek}</Text>
+        <Text style={styles.date}>{date}</Text>
       </View>
     );
   }
